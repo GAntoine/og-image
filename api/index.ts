@@ -5,7 +5,7 @@ import { getScreenshot } from './lib/chromium';
 import { parseRequest as parseMCCRequest } from './meeting-cost-calculator/parser';
 import { getHtml as getMCCHtml } from './meeting-cost-calculator/template';
 
-const isDev = !process.env.GOOGLE_CHROME_BIN;
+const isDev = !process.env.GOOGLE_CHROME_SHIM;
 const isHtmlDebug = process.env.OG_HTML_DEBUG === '1';
 
 const parserMap = {

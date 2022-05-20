@@ -198,6 +198,10 @@ function getCss(image: string, fileType: string, width = '1200', height = '630')
         color: #576CF7;
     }
 
+    .salary-period {
+        font-size: 18px;
+    }
+
     .participants {
         top: 17%;
         left: 62.25%;
@@ -232,7 +236,9 @@ export function getHtml(parsedReq: ParsedRequest) {
     </style>
     <body>
         <div class="entry participants">${participants}</div>
-        <div class="entry salary">${salary}</div>
+        <div class="entry salary">
+            ${salary} <span class="salary-period">/year</span>
+        </div>
         <div class="entry duration">${duration}</div>
         <div class="entry count">${count}</div>
     </body>

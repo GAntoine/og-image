@@ -21,7 +21,7 @@ export async function getOptions(isDev: boolean) {
     } else {
         options = {
             args: [],
-            executablePath: process.env.GOOGLE_CHROME_BIN || exePath,
+            executablePath: process.env.GOOGLE_CHROME_SHIM || exePath,
             headless: true,
         };
     }
