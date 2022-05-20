@@ -14,7 +14,7 @@ export function parseRequest(filename: string, query: any): ParsedRequest {
         data: {
             participants: sanitizeHtml(participants as string || '5'),
             salary: sanitizeHtml(salary as string || '65K'),
-            duration: sanitizeHtml(duration as string || '1'),
+            duration: sanitizeHtml(duration as string || '1 hr'),
             count: sanitizeHtml(count as string || '2'),
         }
     };
