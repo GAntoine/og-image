@@ -1,4 +1,3 @@
-import chrome from 'chrome-aws-lambda';
 const exePath = process.platform === 'win32'
 ? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
 : process.platform === 'linux'
@@ -21,9 +20,9 @@ export async function getOptions(isDev: boolean) {
         };
     } else {
         options = {
-            args: chrome.args,
-            executablePath: await chrome.executablePath,
-            headless: chrome.headless,
+            args: [],
+            executablePath: process.env.GOOGLE_CHROME_BIN || exePath,
+            headless: true,
         };
     }
     return options;
