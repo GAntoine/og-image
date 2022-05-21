@@ -4,6 +4,8 @@ import { parse } from 'url';
 import { getScreenshot } from './lib/chromium';
 import { parseRequest as parseMCCRequest } from './meeting-cost-calculator/parser';
 import { getHtml as getMCCHtml } from './meeting-cost-calculator/template';
+import { parseRequest as parsePTRequest } from './public-template/parser';
+import { getHtml as getPTHtml } from './public-template/template';
 
 const isDev = !process.env.GOOGLE_CHROME_SHIM;
 const isHtmlDebug = process.env.OG_HTML_DEBUG === '1';
@@ -12,7 +14,11 @@ const parserMap = {
     'meeting-cost-calculator': {
         parser: parseMCCRequest,
         html: getMCCHtml,
-    }
+    },
+    'public-template': {
+        parser: parsePTRequest,
+        html: getPTHtml,
+    },
 } as const;
 
 export default async function handler(req: Request, res: Response) {
@@ -20,10 +26,10 @@ export default async function handler(req: Request, res: Response) {
         const { pathname, query } = parse(req.url || '/', true);
         
         const filename = (pathname || '/').slice(0, -1).split("/").pop() as string;
-        const fl = filename.split('.')[0];
+        const [fl, extension] = filename.split('.');
 
         const parser = parserMap[fl as keyof typeof parserMap];
-        const parsedReq = parser.parser(filename, query);
+        const parsedReq = parser.parser(extension, query);
         const html = parser.html(parsedReq);
 
         if (isHtmlDebug) {
